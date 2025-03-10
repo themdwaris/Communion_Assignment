@@ -48,7 +48,9 @@ const Events = () => {
         <p data-aos="fade-up" className="text-[#333333]">
           We Helped Communities Connect & Flourish
         </p>
-        <p data-aos="fade-up" className="text-blue-600 pt-3">✦ Upcoming Events</p>
+        <p data-aos="fade-up" className="text-blue-600 pt-3">
+          ✦ Upcoming Events
+        </p>
       </div>
       <div className="w-full flex justify-center flex-wrap gap-4 mt-8">
         {category.map((cat) => (
@@ -82,8 +84,10 @@ const Events = () => {
       </div>
 
       {/* Listing events */}
-      {cate === "Culture" || cate === "Humanity" ? (
-        <p className="text-center text-xl py-6">No event found</p>
+      {cate === "Culture" ||
+      cate === "Humanity" ||
+      filteredEvents.length === 0 ? (
+        <p className="text-center text-xl py-6">No event found, add a event</p>
       ) : (
         <div className="mt-7 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-x-3 gap-y-5 pt-5 pb-10">
           {filteredEvents?.length > 0 &&
