@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const EventCard = ({ event }) => {
   return (
-    <div data-aos="fade-up" className="w-full md:max-w-80 border rounded-lg p-3">
+    <div  data-aos="fade-up" className="w-full md:max-w-80 border rounded-lg p-3">
       <div className="h-full max-h-52 relative overflow-hidden">
         <img
           src={event1}

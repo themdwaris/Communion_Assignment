@@ -10,36 +10,35 @@ const Events = () => {
     useEventContext();
   const [cate, setCat] = useState("");
   const [filteredEvents, setFilteredEvenets] = useState([]);
-  const category = [
-    "All",
-    "Social",
-    "Religious",
-    "Charity",
-  ];
-
+  const category = ["All", "Social", "Religious", "Charity","Humanity","Culture"];
   const perPage = 8;
+ 
+
+  const filterEvents = () => {
+    if (!events || events.length === 0) return;
+
+    let copyEvents = events.length > 0 && events.slice();
+    copyEvents = copyEvents.filter((event) => {
+      if (cate === "All" || cate === "") return event;
+      if (cate !== event.category) [];
+      return event.category.toLowerCase().includes(cate.toLowerCase());
+    });
+
+    setFilteredEvenets(copyEvents);
+  };
+
   let startIndex = currentPage * perPage;
   let endIndex = startIndex + perPage;
   const numOfPage = Math.ceil(filteredEvents?.length / perPage);
 
-  const filterEvents = () => {
-    let copyEvents = [...events];
-    copyEvents = copyEvents.filter((event) => {
-      if (cate === "All") {
-        return event;
-      } else {
-        return event.category.toLowerCase().includes(cate.toLowerCase());
-      }
-    });
-    if (copyEvents.length > 0) {
-      setFilteredEvenets(copyEvents);
-    }
-  };
-
   useEffect(() => {
     filterEvents();
   }, [cate]);
-  
+
+  useEffect(()=>{
+    setFilteredEvenets(events)
+  },[events])
+
 
   return (
     <div className="w-full">
@@ -83,18 +82,17 @@ const Events = () => {
       </div>
 
       {/* Listing events */}
-      {filteredEvents.length === 0 ? (
+      {filteredEvents?.length === 0 && (
         <p className="text-center text-xl py-6">No event found, add a event</p>
-      ) : (
-        <div className="mt-7 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-x-3 gap-y-5 pt-5 pb-10">
-          {filteredEvents?.length > 0 &&
-            filteredEvents
-              ?.slice(startIndex, endIndex)
-              ?.map((event, index) => <EventCard key={index} event={event} />)
-              .reverse()}
-        </div>
       )}
 
+      <div className="mt-7 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-x-3 gap-y-5 pt-5 pb-10">
+        {filteredEvents?.length > 0 &&
+          filteredEvents
+            ?.slice(startIndex, endIndex)
+            ?.map((event, index) => <EventCard key={index} event={event} />)
+            .reverse()}
+      </div>
       {numOfPage <= 1 ? null : (
         <div className="py-10 w-full flex justify-center gap-3">
           <button
