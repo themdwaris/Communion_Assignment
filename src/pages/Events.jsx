@@ -15,8 +15,6 @@ const Events = () => {
     "Social",
     "Religious",
     "Charity",
-    "Culture",
-    "Humanity",
   ];
 
   const perPage = 8;
@@ -41,6 +39,7 @@ const Events = () => {
   useEffect(() => {
     filterEvents();
   }, [cate]);
+  
 
   return (
     <div className="w-full">
@@ -56,8 +55,8 @@ const Events = () => {
         {category.map((cat) => (
           <span
             key={cat}
-            className={`py-2 px-3 rounded-full cursor-pointer text-sm border bg-blue-50 text-gray-700 transition-all transform active:scale-90 ${
-              cat === cate && "bg-blue-400 text-white"
+            className={`py-2 px-3 select-none rounded-full cursor-pointer text-sm border bg-blue-50 text-gray-700 transition-all transform active:scale-90 ${
+              cat === cate && "bg-blue-500 text-white"
             }`}
             onClick={() => setCat(cat)}
           >
@@ -84,9 +83,7 @@ const Events = () => {
       </div>
 
       {/* Listing events */}
-      {cate === "Culture" ||
-      cate === "Humanity" ||
-      filteredEvents.length === 0 ? (
+      {filteredEvents.length === 0 ? (
         <p className="text-center text-xl py-6">No event found, add a event</p>
       ) : (
         <div className="mt-7 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-x-3 gap-y-5 pt-5 pb-10">
